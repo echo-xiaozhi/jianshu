@@ -14,3 +14,40 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'posts'], function () {
+    // 查看文章列表
+    Route::get('/', '\App\Http\Controllers\PostController@index');
+    // 创建文章
+    Route::get('/create', '\App\Http\Controllers\PostController@create');
+    Route::post('/', '\App\Http\Controllers\PostController@store');
+    // 查看文章详情
+    Route::get('/{post}', '\App\Http\Controllers\PostController@show');
+    // 编辑文章
+    Route::get('/{post}/edit', '\App\Http\Controllers\PostController@edit');
+    Route::put('/{post}', '\App\Http\Controllers\PostController@update');
+    // 删除文章
+    Route::get('/delete', '\App\Http\Controllers\PostController@delete');
+});
+/*
+ *  Route::any() any支持get post put delete options
+ *  Route::match(['get, post']) match支持get post
+ *  Route::group([], function() {})
+ *  put表单传递方式
+ *  <form action="" method="POST">
+ *      <input type="hidden" name="_method" value="PUT" /> == {{ method_field('PUT') }}
+ *  </form>
+ *
+ *  获取路由中的id
+ *  function index($id)
+ *  {
+ *      return $id
+ *  }
+ *
+ *  把模型绑定在路由中，然后去找到指定的方法
+ *  Route::get('/posts/{post}', '\App\Http\Controllers\PostController@show');
+ *  控制器中接收
+ *  function show(\App\Post $post) {
+ *      //······
+ *  }
+ */
