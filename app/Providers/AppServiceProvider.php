@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        //  数据库不是 mysqli的 需要写个码
+        //  数据库不是 mysqli的 需要写个码 767/4 = 191
         Schema::defaultStringLength(191); // 191
     }
 
