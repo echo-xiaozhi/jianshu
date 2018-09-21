@@ -14,7 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// 用户模块
+Route::get('/register', '\App\Http\Controllers\RregisterController@index');
+Route::post('/register', '\App\Http\Controllers\RregisterController@register');
+Route::get('/login', '\App\Http\Controllers\LoginController@index');
+Route::post('/login', '\App\Http\Controllers\LoginContrller@login');
+Route::get('/logout', '\App\Http\Controllers\LoginContrller@logout');
+// 个人设置
+Route::post('/user/me/setting', '\App\Http\Controllers\UserController@setting');
 
+// 文章模块路由
 Route::group(['prefix' => 'posts'], function () {
     // 查看文章列表
     Route::get('/', '\App\Http\Controllers\PostController@index');

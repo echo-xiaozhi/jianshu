@@ -10,6 +10,9 @@ class PostController extends Controller
     // 列表页面
     public function index()
     {
+        // 门面
+//        \Log::info('post_index', ['data' => 'This is post log']);
+
         $posts = Post::orderBy('created_at', 'desc')->paginate(6);
         // compact 变量传递到模板 或者直接在view方法里面第二个参数 写个数组 eg:view('post/index', ['posts' => $posts])
         return view('post/index', compact('posts'));
