@@ -30,9 +30,14 @@ class PostController extends Controller
     // 创建逻辑
     public function store()
     {
-        $post = Post::create(request(['title', 'content']));
+        $this->validate(request(), [
+            'title' => 'required|string|max:25|min:5',
+            'content' => 'required|string|min:10',
+        ]);
 
-        dd($post);
+        Post::create(request(['title', 'content']));
+
+        return redirect('/posts');
     }
 
     // 编辑文章
@@ -51,5 +56,12 @@ class PostController extends Controller
     public function delete()
     {
 
+    }
+
+    // 上传图片
+    public function imageUpload(Request $request)
+    {
+        $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
+        return asset('storage/'.$path);
     }
 }

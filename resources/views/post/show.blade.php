@@ -4,19 +4,17 @@
         <div class="blog-post">
             <div style="display:inline-flex">
                 <h2 class="blog-post-title">{{ $post->title }}</h2>
-                    <a style="margin: auto" href="/posts/{{ $post->id }}/edit">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </a>
+                <a style="margin: auto" href="/posts/{{ $post->id }}/edit">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </a>
                 <a style="margin: auto" href="/posts/{{ $post->id }}/delete">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
             </div>
 
-            <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }}by <a href="#">Kassandra Ankunding2</a></p>
-
-            <p>
-                {{ $post->content }}
-            </p>
+            <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }}by <a href="#">Kassandra
+                    Ankunding2</a></p>
+            {!! $post->content !!}
             <div>
                 <a href="/posts/{{ $post->id }}/zan" type="button" class="btn btn-primary btn-lg">赞</a>
 

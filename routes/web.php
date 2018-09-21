@@ -28,6 +28,8 @@ Route::group(['prefix' => 'posts'], function () {
     Route::put('/{post}', '\App\Http\Controllers\PostController@update');
     // 删除文章
     Route::get('/delete', '\App\Http\Controllers\PostController@delete');
+    // 图片上传
+    Route::post('/image/upload', '\App\Http\Controllers\PostController@imageUpload');
 });
 /*
  *  Route::any() any支持get post put delete options
