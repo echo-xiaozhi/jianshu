@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -9,11 +10,7 @@ class PostController extends Controller
     // 列表页面
     public function index()
     {
-        $posts = [
-            ['title' => 'This is title1'],
-            ['title' => 'This is title2'],
-            ['title' => 'This is title3'],
-        ];
+        $posts = Post::orderBy('created_at', 'desc')->paginate(6);
         // compact 变量传递到模板 或者直接在view方法里面第二个参数 写个数组 eg:view('post/index', ['posts' => $posts])
         return view('post/index', compact('posts'));
     }
