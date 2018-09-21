@@ -30,7 +30,9 @@ class PostController extends Controller
     // 创建逻辑
     public function store()
     {
+        $post = Post::create(request(['title', 'content']));
 
+        dd($post);
     }
 
     // 编辑文章
