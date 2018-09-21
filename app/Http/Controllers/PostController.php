@@ -16,10 +16,9 @@ class PostController extends Controller
     }
 
     // 详情页
-    public function show()
+    public function show(Post $post)
     {
-
-        return view('post/show', ['title' => 'This is title', 'isShow' => false]);
+        return view('post/show', compact('post'));
     }
 
     //创建文章
