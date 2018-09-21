@@ -41,21 +41,35 @@ class PostController extends Controller
     }
 
     // 编辑文章
-    public function edit()
+    public function edit(Post $post)
     {
-        return view('post/edit');
+        return view('post/edit', compact('post'));
     }
 
     // 编辑逻辑
-    public function update()
+    public function update(Post $post)
     {
+        //验证
+        $this->validate(request(), [
+            'title' => 'required|string|max:25|min:5',
+            'content' => 'required|string|min:10',
+        ]);
+        //逻辑
+        $post->title = request('title');
+        $post->content = \request('content');
 
+        $post->save();
+        //返回
+        return redirect("/posts/{$post->id}");
     }
 
     // 删除
-    public function delete()
+    public function delete(Post $post)
     {
+        // TODO: 用户权限
+        $post->delete();
 
+        return redirect('/posts');
     }
 
     // 上传图片
