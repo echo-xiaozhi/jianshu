@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,7 @@ class PostController extends Controller
     // 详情页
     public function show(Post $post)
     {
+        $post->load('comments');
         return view('post/show', compact('post'));
     }
 
@@ -86,5 +88,21 @@ class PostController extends Controller
     {
         $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
         return asset('storage/'.$path);
+    }
+
+    // 创建评论
+    public function comment(Post $post)
+    {
+        // 验证
+        $this->validate(\request(), [
+            'content' => 'required|min:3'
+        ]);
+        // 逻辑
+        $comment = new Comment();
+        $comment->user_id = Auth::id();
+        $comment->content = \request('content');
+        $post->comments()->save($comment);
+        // 渲染
+        return back();
     }
 }
