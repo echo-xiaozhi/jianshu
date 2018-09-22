@@ -15,13 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 // 用户模块
-Route::get('/register', '\App\Http\Controllers\RregisterController@index');
-Route::post('/register', '\App\Http\Controllers\RregisterController@register');
+Route::get('/register', '\App\Http\Controllers\RegisterController@index');
+Route::post('/register', '\App\Http\Controllers\RegisterController@register');
 Route::get('/login', '\App\Http\Controllers\LoginController@index');
-Route::post('/login', '\App\Http\Controllers\LoginContrller@login');
-Route::get('/logout', '\App\Http\Controllers\LoginContrller@logout');
+Route::post('/login', '\App\Http\Controllers\LoginController@login');
+Route::get('/logout', '\App\Http\Controllers\LoginController@logout');
 // 个人设置
-Route::post('/user/me/setting', '\App\Http\Controllers\UserController@setting');
+Route::get('/user/me/setting', '\App\Http\Controllers\UserController@setting');
 
 // 文章模块路由
 Route::group(['prefix' => 'posts'], function () {
