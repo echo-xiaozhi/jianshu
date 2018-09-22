@@ -37,8 +37,7 @@
                 <div class="blog-post">
                     <h2 class="blog-post-title"><a href="/posts/{{ $post->id }}">{{ str_limit($post->title, 15, '···') }}</a></h2>
                     <!-- toFormatteDateString() 转换成 Sep 21, 2018 -->
-                    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="/user/5">Kassandra
-                            Ankunding2</a></p>
+                    <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a href="/user/{{$post->user_id}}">{{ $post->user->name }}</a></p>
                         <!-- str_limit() 截取100个字符，超出在后面显示··· -->
                     {!! str_limit($post->content, 100, '···') !!}
                     <p class="blog-post-meta">赞 0 | 评论 0</p>

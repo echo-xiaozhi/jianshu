@@ -13,4 +13,8 @@ class Post extends Model
 {
     //可以注入的字段
 //    protected $fillable = ['title', 'content'];
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

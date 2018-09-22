@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -37,8 +38,10 @@ class PostController extends Controller
             'title' => 'required|string|max:25|min:5',
             'content' => 'required|string|min:10',
         ]);
+        $user_id = Auth::id();
+        $parame = array_merge(request(['title', 'content']), compact('user_id'));
 
-        Post::create(request(['title', 'content']));
+        Post::create($parame);
 
         return redirect('/posts');
     }
@@ -57,7 +60,9 @@ class PostController extends Controller
             'title' => 'required|string|max:25|min:5',
             'content' => 'required|string|min:10',
         ]);
+
         //逻辑
+        $this->authorize('update', $post);
         $post->title = request('title');
         $post->content = \request('content');
 
@@ -70,6 +75,7 @@ class PostController extends Controller
     public function delete(Post $post)
     {
         // TODO: 用户权限
+        $this->authorize('delete', $post);
         $post->delete();
 
         return redirect('/posts');
