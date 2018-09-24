@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model;
+use App\Zan;
 
 /*
  *  Post 对应的就是 posts表
@@ -22,5 +23,17 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany('App\Comment')->orderBy('created_at', 'desc');
+    }
+
+    // 赞对文章
+    public function zan($user_id)
+    {
+        return $this->hasOne(\App\Zan::class)->where('user_id', $user_id);
+    }
+
+    // 获取赞总数
+    public function zans()
+    {
+        return $this->hasMany(\App\Zan::class);
     }
 }
