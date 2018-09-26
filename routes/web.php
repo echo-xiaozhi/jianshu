@@ -21,7 +21,6 @@ Route::get('/login', '\App\Http\Controllers\LoginController@index');
 Route::post('/login', '\App\Http\Controllers\LoginController@login');
 Route::get('/logout', '\App\Http\Controllers\LoginController@logout');
 // 个人设置
-Route::get('/user/me/setting', '\App\Http\Controllers\UserController@setting');
 Route::group(['prefix' => 'user'], function () {
     //个人设置
     Route::get('/me/setting', '\App\Http\Controllers\UserController@setting');
@@ -29,9 +28,9 @@ Route::group(['prefix' => 'user'], function () {
     // 个人主页
     Route::get('/{user}', '\App\Http\Controllers\UserController@show');
     // 关注用户
-    Route::post('/{user}/zan', '\App\Http\Controllers\UserController@fan');
+    Route::post('/{user}/fan', '\App\Http\Controllers\UserController@fan');
     // 取消关注
-    Route::post('/{user}/unzan','\App\Http\Controllers\UserController@unfan');
+    Route::post('/{user}/unfan','\App\Http\Controllers\UserController@unfan');
 });
 
 // 文章模块路由
