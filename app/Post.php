@@ -12,6 +12,7 @@ use App\Zan;
  */
 class Post extends Model
 {
+//    use Searchable;
     //可以注入的字段
 //    protected $fillable = ['title', 'content'];
     public function user()
@@ -36,4 +37,20 @@ class Post extends Model
     {
         return $this->hasMany(\App\Zan::class);
     }
+
+    // 得到该模型索引的名字
+    /*public function searchableAs()
+    {
+        return 'post';
+    }
+
+    // 有哪些字段需要搜索
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+            'content' => $this->content,
+        ];
+    }*/
 }
+

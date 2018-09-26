@@ -26,4 +26,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // 获取当前用户有多少文章
+    public function posts()
+    {
+        // hasMany 参数：posts表里的user_id 对应 users表里的id
+        return $this->hasMany(\App\Post::class, 'user_id', 'id');
+    }
 }

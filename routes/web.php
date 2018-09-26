@@ -22,6 +22,12 @@ Route::post('/login', '\App\Http\Controllers\LoginController@login');
 Route::get('/logout', '\App\Http\Controllers\LoginController@logout');
 // 个人设置
 Route::get('/user/me/setting', '\App\Http\Controllers\UserController@setting');
+Route::group(['prefix' => 'user'], function () {
+    //个人设置
+    Route::get('/me/setting', '\App\Http\Controllers\UserController@setting');
+    // 个人主页
+    Route::get('/{user}', '\App\Http\Controllers\UserController@index');
+});
 
 // 文章模块路由
 Route::group(['prefix' => 'posts'], function () {
@@ -30,6 +36,8 @@ Route::group(['prefix' => 'posts'], function () {
     // 创建文章
     Route::get('/create', '\App\Http\Controllers\PostController@create');
     Route::post('/', '\App\Http\Controllers\PostController@store');
+    // 搜索页
+    Route::any('/search', '\App\Http\Controllers\PostController@search');
     // 查看文章详情
     Route::get('/{post}', '\App\Http\Controllers\PostController@show');
     // 编辑文章

@@ -7,6 +7,7 @@ use App\Post;
 use App\Zan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -41,6 +42,7 @@ class PostController extends Controller
             'title' => 'required|string|max:25|min:5',
             'content' => 'required|string|min:10',
         ]);
+
         $user_id = Auth::id();
         $parame = array_merge(request(['title', 'content']), compact('user_id'));
 
@@ -94,17 +96,23 @@ class PostController extends Controller
     // 创建评论
     public function comment(Post $post)
     {
-        // 验证
-        $this->validate(\request(), [
-            'content' => 'required|min:3'
-        ]);
-        // 逻辑
-        $comment = new Comment();
-        $comment->user_id = Auth::id();
-        $comment->content = \request('content');
-        $post->comments()->save($comment);
-        // 渲染
-        return back();
+        if (!empty(Auth::id())) {
+            // 验证
+            $this->validate(\request(), [
+                'content' => 'required|min:3'
+            ]);
+            // 逻辑
+            $comment = new Comment();
+            $comment->user_id = Auth::id();
+            $comment->content = \request('content');
+            $post->comments()->save($comment);
+            // 渲染
+            return back();
+        } else {
+            return redirect('/login');
+        }
+
+
     }
 
     // 赞
@@ -125,5 +133,20 @@ class PostController extends Controller
         $post->zan(Auth::id())->delete();
 
         return back();
+    }
+
+    // 搜索页
+    public function search()
+    {
+        DB::enableQueryLog();
+        $keyword = request('query');
+        $posts = DB::table('posts')
+            ->leftJoin('users', 'posts.user_id', '=', 'users.id')
+            ->where('title', 'LIKE', '%'.$keyword.'%')
+            ->select('posts.*', 'users.name');
+        $data = $posts->paginate(6);
+        $data->appends(['query' => $keyword]);
+        $count = $posts->count();
+        return view('post/search', compact(['data', 'count', 'keyword']));
     }
 }
