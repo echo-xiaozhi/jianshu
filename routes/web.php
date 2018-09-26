@@ -58,6 +58,13 @@ Route::group(['prefix' => 'posts'], function () {
     // 取消赞
     Route::get('/{post}/unzan', '\App\Http\Controllers\PostController@unzan');
 });
+// 专题
+Route::group(['prefix' => 'topic'], function () {
+    // 专题展示页
+    Route::get('/{topic}', '\App\Http\Controllers\TopicController@show');
+    // 专题投稿路由
+    Route::post('/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
+});
 /*
  *  Route::any() any支持get post put delete options
  *  Route::match(['get, post']) match支持get post
