@@ -98,13 +98,13 @@ class PostController extends Controller
     {
         if (!empty(Auth::id())) {
             // 验证
-            $this->validate(\request(), [
+            $this->validate(request(), [
                 'content' => 'required|min:3'
             ]);
             // 逻辑
             $comment = new Comment();
             $comment->user_id = Auth::id();
-            $comment->content = \request('content');
+            $comment->content = request('content');
             $post->comments()->save($comment);
             // 渲染
             return back();
