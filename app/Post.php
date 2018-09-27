@@ -4,6 +4,8 @@ namespace App;
 
 use App\Model;
 use App\Zan;
+use PhpParser\Builder;
+use Illuminate\Database\Eloquent\Scope;
 
 /*
  *  Post 对应的就是 posts表
@@ -38,19 +40,25 @@ class Post extends Model
         return $this->hasMany(\App\Zan::class);
     }
 
-    // 得到该模型索引的名字
-    /*public function searchableAs()
+    // 获取属于某个作者的文章
+    public function scopeAuthorBy(Builder $query, $user_id)
     {
-        return 'post';
+        return $query->where('user_id', $user_id);
     }
 
-    // 有哪些字段需要搜索
-    public function toSearchableArray()
+    //专题对应文章
+    public function postTopics()
     {
-        return [
-            'title' => $this->title,
-            'content' => $this->content,
-        ];
-    }*/
+        return $this->hasMany(\App\PostTopic::class, 'post_id', 'id');
+    }
+
+    // 不属于某个专题的文章
+    public function scopeTopicBy(Builder $query, $topic_id)
+    {
+        // use 把外部变量传到匿名函数里面
+        return $query->doesntHave('postTopics', 'and', function ($q) use ($topic_id) {
+            $q->where('topic_id', $topic_id);
+        });
+    }
 }
 
