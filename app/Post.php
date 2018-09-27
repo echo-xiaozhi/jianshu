@@ -4,7 +4,7 @@ namespace App;
 
 use App\Model;
 use App\Zan;
-use PhpParser\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Scope;
 
 /*
