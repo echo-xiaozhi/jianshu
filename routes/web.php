@@ -65,7 +65,10 @@ Route::group(['prefix' => 'topic'], function () {
     // 专题投稿路由
     Route::post('/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
 });
+// 后台模块路由
+include_once ('admin.php');
 /*
+ *
  *  Route::any() any支持get post put delete options
  *  Route::match(['get, post']) match支持get post
  *  Route::group([], function() {})
