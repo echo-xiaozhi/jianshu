@@ -17,6 +17,21 @@ Route::group(['prefix' => '/admin'], function (){
         Route::get('/users/{user}/update', '\App\Admin\Controllers\UserController@update');
         Route::post('/users/{user}/edit', '\App\Admin\Controllers\UserController@edit');
         Route::get('/users/{user}/delete', '\App\Admin\Controllers\UserController@delete')->name('delete');
+        Route::get('/users/{user}/role', '\App\Admin\Controllers\UserController@role');
+        Route::post('/users/{user}/role', '\App\Admin\Controllers\UserController@storeRole');
+
+        // 角色
+        Route::get('/roles', '\App\Admin\Controllers\RoleController@index');
+        Route::get('/roles/create', '\App\Admin\Controllers\RoleController@create');
+        Route::post('/roles/store', '\App\Admin\Controllers\RoleController@store');
+        Route::get('/roles/{user}/permission', '\App\Admin\Controllers\RoleController@permission');
+        Route::post('/roles/{user}/permission', '\App\Admin\Controllers\RoleController@storePermission');
+
+        // 权限
+        Route::get('/permissions', '\App\Admin\Controllers\PermissionController@index');
+        Route::get('/permissions/create', '\App\Admin\Controllers\PermissionController@create');
+        Route::post('/permissions/store', '\App\Admin\Controllers\PermissionController@store');
+
         // 文章审核
         Route::get('/posts', '\App\Admin\Controllers\PostController@index');
         Route::post('/posts/{post}/status', '\App\Admin\Controllers\PostController@status');
