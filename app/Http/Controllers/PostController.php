@@ -69,7 +69,7 @@ class PostController extends Controller
         //逻辑
         $this->authorize('update', $post);
         $post->title = request('title');
-        $post->content = \request('content');
+        $post->content = request('content');
 
         $post->save();
         //返回
