@@ -17,6 +17,9 @@ Route::group(['prefix' => '/admin'], function (){
         Route::get('/users/{user}/update', '\App\Admin\Controllers\UserController@update');
         Route::post('/users/{user}/edit', '\App\Admin\Controllers\UserController@edit');
         Route::get('/users/{user}/delete', '\App\Admin\Controllers\UserController@delete')->name('delete');
+        // 文章审核
+        Route::get('/posts', '\App\Admin\Controllers\PostController@index');
+        Route::post('/posts/{post}/status', '\App\Admin\Controllers\PostController@status');
     });
 
 });
