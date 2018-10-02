@@ -34,6 +34,9 @@ Route::group(['prefix' => '/admin'], function (){
             Route::get('/permissions', '\App\Admin\Controllers\PermissionController@index');
             Route::get('/permissions/create', '\App\Admin\Controllers\PermissionController@create');
             Route::post('/permissions/store', '\App\Admin\Controllers\PermissionController@store');
+            Route::get('/permissions/{permission}/update', '\App\Admin\Controllers\PermissionController@update');
+            Route::post('/permissions/{permission}/edit', '\App\Admin\Controllers\PermissionController@edit');
+            Route::get('/permissions/{permission}/delete', '\App\Admin\Controllers\PermissionController@delete');
         });
         Route::group(['middleware' => 'can:post'], function () {
             // 文章审核

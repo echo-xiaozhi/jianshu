@@ -26,6 +26,8 @@
                                     <td>{{$permission->name}}</td>
                                     <td>{{$permission->description}}</td>
                                     <td>
+                                        <a type="button" class="btn" href="/admin/permissions/{{$permission->id}}/update">更改</a>
+                                        <a type="button" class="btn" href="/admin/permissions/{{$permission->id}}/delete">删除</a>
                                     </td>
                                 </tr>
                                     @endforeach

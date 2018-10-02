@@ -31,4 +31,30 @@ class PermissionController extends Controller
 
         return redirect('/admin/permissions');
     }
+
+    // 修改权限页面
+    public function update(AdminPermission $permission)
+    {
+        return view('admin.permission.edit', compact('permission'));
+    }
+
+    // 修改权限页面行为
+    public function edit(AdminPermission $permission)
+    {
+        $this->validate(request(), [
+            'description' => 'required'
+        ]);
+
+        $permission->description = request('description');
+        $permission->save();
+
+        return redirect('/admin/permissions');
+    }
+
+    // 删除权限
+    public function delete(AdminPermission $permission)
+    {
+        $permission->delete();
+        return back();
+    }
 }
