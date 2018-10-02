@@ -29,6 +29,9 @@ Route::group(['prefix' => '/admin'], function (){
             Route::post('/roles/store', '\App\Admin\Controllers\RoleController@store');
             Route::get('/roles/{role}/permission', '\App\Admin\Controllers\RoleController@permission');
             Route::post('/roles/{role}/permission', '\App\Admin\Controllers\RoleController@storePermission');
+            Route::get('/roles/{role}/update', '\App\Admin\Controllers\RoleController@update');
+            Route::post('/roles/{role}/edit', '\App\Admin\Controllers\RoleController@edit');
+            Route::get('/roles/{role}/delete', '\App\Admin\Controllers\RoleController@delete');
 
             // 权限
             Route::get('/permissions', '\App\Admin\Controllers\PermissionController@index');

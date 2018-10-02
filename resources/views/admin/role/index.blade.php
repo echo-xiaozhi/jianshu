@@ -28,6 +28,8 @@
                                 <td>{{$role->description}}</td>
                                 <td>
                                     <a type="button" class="btn" href="/admin/roles/{{$role->id}}/permission">权限管理</a>
+                                    <a type="button" class="btn" href="/admin/roles/{{$role->id}}/update">修改</a>
+                                    <a type="button" class="btn" href="/admin/roles/{{$role->id}}/delete">删除</a>
                                 </td>
                             </tr>
                                 @endforeach

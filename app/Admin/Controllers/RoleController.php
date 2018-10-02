@@ -34,6 +34,34 @@ class RoleController extends Controller
         return redirect('/admin/roles');
     }
 
+    // 修改权限页面
+    public function update(AdminRole $role)
+    {
+        return view('admin.role.edit', compact('role'));
+    }
+
+    // 修改权限页面行为
+    public function edit(AdminRole $role)
+    {
+        $this->validate(request(), [
+            'name' => 'required|min:3',
+            'description' => 'required'
+        ]);
+
+        $role->name = request('name');
+        $role->description = request('description');
+        $role->save();
+
+        return redirect('/admin/roles');
+    }
+
+    // 删除权限
+    public function delete(AdminRole $role)
+    {
+        $role->delete();
+        return back();
+    }
+
     // 角色和权限关系页面
     public function permission(AdminRole $role)
     {
