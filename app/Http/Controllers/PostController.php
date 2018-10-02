@@ -18,6 +18,11 @@ class PostController extends Controller
 //        \Log::info('post_index', ['data' => 'This is post log']);
 
         $posts = Post::orderBy('created_at', 'desc')->withCount(['comments', 'zans'])->paginate(6);
+        //两种预加载 with & load
+//        $posts = Post::orderBy('created_at', 'desc')->withCount(['comments', 'zans'])->with('user')->paginate(6); // with 预加载
+        // 第二种load
+        $posts->load('user');
+
         // compact 变量传递到模板 或者直接在view方法里面第二个参数 写个数组 eg:view('post/index', ['posts' => $posts])
         return view('post/index', compact('posts'));
     }
