@@ -65,6 +65,9 @@ Route::group(['prefix' => 'topic'], function () {
     // 专题投稿路由
     Route::post('/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
 });
+
+// 通知
+Route::get('/notices', '\App\Http\Controllers\NoticeController@index');
 // 后台模块路由
 include_once ('admin.php');
 /*
