@@ -24,7 +24,7 @@ class AdminUser extends Authenticatable
     // 判断是否有某些角色
     public function isInRoles($roles)
     {
-        return !!$roles->intersect($this->roles)->count();
+        return !! $roles->intersect($this->roles)->count();
     }
 
     // 给用户分配角色
@@ -42,7 +42,7 @@ class AdminUser extends Authenticatable
     // 判断用户是否有权限
     public function hasPermission($permission)
     {
-        return $this->isInRoles($permission);
+        return $this->isInRoles($permission->roles);
     }
 
 }
