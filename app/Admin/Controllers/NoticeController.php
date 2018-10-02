@@ -1,6 +1,7 @@
 <?php
 namespace App\Admin\Controllers;
 
+use App\Jobs\SendMessage;
 use App\Notice;
 use Mockery\Matcher\Not;
 
@@ -24,7 +25,10 @@ class NoticeController extends Controller
             'content' => 'required|string'
         ]);
 
-        Notice::create(request(['title', 'content']));
+        $notice = Notice::create(request(['title', 'content']));
+
+        // 创建分发
+        dispatch(new SendMessage($notice));
 
         return redirect('/admin/notices');
     }
